@@ -1,14 +1,35 @@
 import pandas as pd
 import requests
-from io import StringIO
+import urllib.request
 
-# open and read the csv files
-cement_villar_file = pd.read_csv('Villar_uniprotIDs.csv')
-sialome_villar_file = pd.read_csv('Villar_uniprotIDs-tickSG.csv')
-hostSG_villar_file = pd.read_csv('Villar_uniprotIDs-hostSG.csv')
 
-# write the protein sequences in a FASTA file 
-with open('VillarDBcement.fasta', 'w'):
-    for x in 'Uniprot accesion number':
-        # retrieve the Uniprot data from this website
-        seq = 'https://www.uniprot.org/uniprot/'+ x +'.fasta'
+## open and read the csv files
+cement_villar_file = pd.read_csv('Villar_uniprotIDs.csv', skiprows=[0], header=None, index_col=False )
+#sialome_villar_file = pd.read_csv('Villar_uniprotIDs-tickSG.csv')
+#hostSG_villar_file = pd.read_csv('Villar_uniprotIDs-hostSG.csv')
+
+obsolete = []
+row = 0
+
+for i in cement_villar_file.itertuples():
+    ## retrieve the sequences using Uniprot IDs from the Uniprot website
+    uniprotID = cement_villar_file.iloc(axis=0)[row, 0]
+    url = 'https://www.uniprot.org/uniprot/'+ uniprotID +'.fasta'
+    row = row + 1
+    
+    try:
+        with urllib.request.urlopen(url) as url:
+
+            ## read the content from the url and decode it
+            page = url.read()
+            seq = page.decode('utf8')
+
+            ## open and write a new fasta file with all the sequences corresponding to the Uniprot IDs stored in the csv file
+            with open('VillarDBcement.fasta', 'a') as VillarDBcement:
+                VillarDBcement.write(seq)
+
+            if len(seq) == 0:
+                obsolete.append(row)
+    except:
+        obsolete.append(row)
+        pass
