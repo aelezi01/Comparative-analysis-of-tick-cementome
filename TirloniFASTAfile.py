@@ -2,18 +2,17 @@ import pandas as pd
 import requests
 import urllib.request
 
-
-## open and read the csv files
-cement_villar_file = pd.read_csv('Villar_uniprotIDs.csv', skiprows=[0], header=None, index_col=False )
-#sialome_villar_file = pd.read_csv('Villar_uniprotIDs-tickSG.csv')
-#hostSG_villar_file = pd.read_csv('Villar_uniprotIDs-hostSG.csv')
+#tirloniDB = pd.read_csv('TirloniSwissprot1.csv')
+#tirloniDB = pd.read_csv('TirloniSwissprot2Tick.csv')
+tirloniDB = pd.read_csv('TirloniSwissprot2HostContaminat.csv')
+print(len(tirloniDB))
 
 obsolete = []
 row = 0
 
-for i in cement_villar_file.itertuples():
+for i in tirloniDB.itertuples():
     ## retrieve the sequences using Uniprot IDs from the Uniprot website
-    uniprotID = cement_villar_file.iloc(axis=0)[row, 0]
+    uniprotID = tirloniDB.iloc(axis=0)[row, 0]
     url = 'https://www.uniprot.org/uniprot/'+ uniprotID +'.fasta'
     row = row + 1
     
@@ -25,8 +24,8 @@ for i in cement_villar_file.itertuples():
             seq = page.decode('utf8')
 
             ## open and write a new fasta file with all the sequences corresponding to the Uniprot IDs stored in the csv file
-            with open('VillarDBcement.fasta', 'a') as VillarDBcement:
-                VillarDBcement.write(seq)
+            with open('TirloniDB1.fasta', 'a') as tirloniDB:
+                VillarDBhostCement.write(seq)
 
             if len(seq) == 0:
                 obsolete.append(row)
