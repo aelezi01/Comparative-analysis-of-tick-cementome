@@ -32,3 +32,5 @@ for i in tirloniDB.itertuples():
     except:
         obsolete.append(row)
         pass
+
+print(len(obsolete))
