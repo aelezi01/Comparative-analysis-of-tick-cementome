@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 import urllib.request
 
-dataset = pd.read_csv('ZambeziensisUniprot.csv', skiprows=[0], header=None, index_col=False)
+dataset = pd.read_csv('rostratusUniprot.csv', skiprows=[0], header=None, index_col=False)
 print(len(dataset))
 
 obsolete = []
@@ -22,7 +22,7 @@ for i in dataset.itertuples():
             seq = page.decode('utf8')
 
             ## open and write a new fasta file with all the sequences corresponding to the Uniprot IDs stored in the csv file
-            with open('Rhipicephalus_zambeziensis.fasta', 'a') as ffasta:
+            with open('Ornithodoros_rostratus.fasta', 'a') as ffasta:
                 ffasta.write(seq)
 
             if len(seq) == 0:
