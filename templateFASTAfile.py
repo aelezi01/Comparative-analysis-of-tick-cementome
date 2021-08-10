@@ -3,7 +3,7 @@ import requests
 import urllib.request
 
 from Bio import Entrez
-Entrez.email = areda.elezi@gmail.com
+Entrez.email = 'areda.elezi@gmail.com'
 
 dataset = pd.read_csv('/data/AureolatumUniprot.csv', skiprows=[0], header=None, index_col=False)
 outFile = 'Amblyomma_aureolatum.fasta'
