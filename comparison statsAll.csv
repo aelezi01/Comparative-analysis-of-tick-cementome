@@ -1,6 +1,6 @@
-,MC,MPC,MHC,MS,MPS,,,C = CEMENTOME
+,MC,TC,MHC,MS,TS,,,C = CEMENTOME
 Single copy orthologues,0,0,12,205,102,,,M = METASTRIATA
-Orthogroups all species,20,10,95,835,1,,,P = POSTRIATA
+Orthogroups all species,20,10,95,835,1,,,T = TICK (POSTRIATA+SOFT TICKS)
 % genes in  orthogroups,86.3,92.9,86.5,87.5,93.3,,,S = SIALOME
 All genes,39882,68560,40092,41737,70415,,,H = HOST
 Species no.,5,9,5,5,9,,,
