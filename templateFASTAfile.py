@@ -2,7 +2,11 @@ import pandas as pd
 import requests
 import urllib.request
 
-dataset = pd.read_csv('rostratusUniprot.csv', skiprows=[0], header=None, index_col=False)
+from Bio import Entrez
+Entrez.email = areda.elezi@gmail.com
+
+dataset = pd.read_csv('/data/AureolatumUniprot.csv', skiprows=[0], header=None, index_col=False)
+outFile = 'Amblyomma_aureolatum.fasta'
 print(len(dataset))
 
 obsolete = []
@@ -22,13 +26,26 @@ for i in dataset.itertuples():
             seq = page.decode('utf8')
 
             ## open and write a new fasta file with all the sequences corresponding to the Uniprot IDs stored in the csv file
-            with open('Ornithodoros_rostratus.fasta', 'a') as ffasta:
+            with open(outFile, 'a') as ffasta:
                 ffasta.write(seq)
 
             if len(seq) == 0:
                 obsolete.append(row)
     except:
-        obsolete.append(row)
-        pass
+        try:
+            with Entrez.efetch(db='protein',id=uniprotID, rettype = 'fasta') as handle:
+
+                ## read the content from the Entrez database
+                seq = handle.read()
+
+                ## open and write a new fasta file with all the sequences corresponding to the Uniprot IDs stored in the csv file
+                with open(outFile, 'a') as ffasta:
+                    ffasta.write(seq)
+
+                if len(seq) == 0:
+                    obsolete.append(row)
+        except:
+            obsolete.append(row)
+            pass
 
 print(len(obsolete))
