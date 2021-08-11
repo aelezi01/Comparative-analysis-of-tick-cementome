@@ -24,7 +24,7 @@ for i in dataset.itertuples():
             seq = page.decode('utf8')
 
             ## open and write a new fasta file with all the sequences corresponding to the Uniprot IDs stored in the csv file
-            with open(here('fasta', 'Rhipicephalus_bursa.fasta', 'a') as ffasta:
+            with open(here('fasta', 'Rhipicephalus_bursa.fasta'), 'a') as ffasta:
                 ffasta.write(seq)
 
             if len(seq) == 0:
