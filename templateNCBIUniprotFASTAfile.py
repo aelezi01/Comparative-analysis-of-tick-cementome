@@ -6,8 +6,8 @@ from pyhere import here
 from Bio import Entrez
 Entrez.email = 'areda.elezi@gmail.com'
 
-dataset = pd.read_csv(here('data', 'moubataUniprot.csv'), skiprows=[0], header=None, index_col=False)
-outFile = here('fasta', 'Ornithodoros_moubata2.fasta')
+dataset = pd.read_csv(here('data', 'Uniprot', 'moubataUniprot.csv'), skiprows=[0], header=None, index_col=False)
+outFile = here('data', 'fasta', 'Ornithodoros_moubata2.fasta')
 print(len(dataset))
 
 obsolete = []
