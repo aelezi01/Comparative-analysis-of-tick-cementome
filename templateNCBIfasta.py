@@ -4,7 +4,6 @@ import urllib.request
 from pyhere import here
 
 from Bio import Entrez
-Entrez.email = 'areda.elezi@gmail.com'
 
 dataset = pd.read_csv(here('data', 'Uniprot', 'ScapularisNCBI.csv'), skiprows=[0], header=None, index_col=False)
 outFile = here('data', 'fasta', 'Ixodes_scapularis.fasta')

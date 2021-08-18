@@ -1,7 +1,6 @@
 import pandas as pd
 import requests
 import urllib.request
-
 from pyhere import here
 
 dataset = pd.read_csv(here('data', 'Uniprot', 'ZambeziensisUniprot.csv'), skiprows=[0], header=None, index_col=False)
